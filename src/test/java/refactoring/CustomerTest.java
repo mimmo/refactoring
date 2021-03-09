@@ -33,64 +33,69 @@ public class CustomerTest {
 
 	@Test
 	public void considerCustomerWithARegularMovieRental() {
-		_customer.addRental(new Rental(_movie, 1));
+		Rental rental = new Rental(_movie, 1);
+		_customer.addRental(rental);
 		assertEquals(
 			_customer.statement(),
-			Stream.of("Rental Record for mario",
-				"\tThe movie\t2.0",
-				"Amount owed is 2.0",
-				"You earned 1 frequent renter points"
-			).collect(Collectors.joining("\n")));
+			generateStatementWith(_customer, rental)
+			);
 	}
 
 	@Test
-	public void considerCustomerWithTwoRegularMoviesRentals() {
-		_customer.addRental(new Rental(_movie, 1));
-		_customer.addRental(new Rental(_movie, 1));
+	public void considerCustomerWithARegularMovieRentalThreeDaysLong() {
+		Rental rental = new Rental(_movie, 3);
+		_customer.addRental(rental);
 		assertEquals(
 			_customer.statement(),
-			Stream.of("Rental Record for mario",
-				"\tThe movie\t2.0",
-				"\tThe movie\t2.0",
-				"Amount owed is 4.0",
-				"You earned 2 frequent renter points"
-			).collect(Collectors.joining("\n")));
+			generateStatementWith(_customer, rental)
+		);
 	}
 
 	@Test
 	public void considerCustomerWithANewReleaseMovieRental() {
-		_customer.addRental(new Rental(_newReleaseMovie, 1));
+		Rental rental = new Rental(_newReleaseMovie, 1);
+		_customer.addRental(rental);
 		assertEquals(
 			_customer.statement(),
-			Stream.of("Rental Record for mario",
-				"\tThe movie\t3.0",
-				"Amount owed is 3.0",
-				"You earned 1 frequent renter points"
-			).collect(Collectors.joining("\n")));
+			generateStatementWith(_customer, rental)
+		);
 	}
 
 	@Test
-	public void considerCustomerWithANewReleaseMovieRentalTwoDaysLong() {
-		_customer.addRental(new Rental(_newReleaseMovie, 2));
+	public void earnDoublePointsWithNewReleaseRentalForMoreThanOneDay() {
+		Rental rental = new Rental(_newReleaseMovie, 2);
+		_customer.addRental(rental);
 		assertEquals(
 			_customer.statement(),
-			Stream.of("Rental Record for mario",
-				"\tThe movie\t6.0",
-				"Amount owed is 6.0",
-				"You earned 2 frequent renter points"
-			).collect(Collectors.joining("\n")));
+			generateStatementWith(_customer, rental)
+		);
 	}
 
 	@Test
 	public void considerCustomerWithAChildrenMovieRental() {
-		_customer.addRental(new Rental(_childrensMovie, 1));
+		Rental rental = new Rental(_childrensMovie, 1);
+		_customer.addRental(rental);
 		assertEquals(
 			_customer.statement(),
-			Stream.of("Rental Record for mario",
-				"\tThe movie\t1.5",
-				"Amount owed is 1.5",
-				"You earned 1 frequent renter points"
-			).collect(Collectors.joining("\n")));
+			generateStatementWith(_customer, rental));
+	}
+
+	@Test
+	public void considerCustomerWithAChildrenMovieRentalFourDaysLong() {
+		Rental rental = new Rental(_childrensMovie, 4);
+		_customer.addRental(rental);
+		assertEquals(
+			_customer.statement(),
+			generateStatementWith(_customer, rental));
+	}
+
+	private String generateStatementWith(Customer customer, Rental rental) {
+		return Stream.of(
+			String.format("Rental Record for %s", customer.getName()),
+			String.format("\tThe movie\t%s", rental.getCharge()),
+			String.format("Amount owed is %s", rental.getMovie().getCharge(rental.getDaysRented())),
+			String.format("You earned %s frequent renter points", rental.getMovie().getFrequentRenterPoints(rental.getDaysRented()))
+		).collect(Collectors.joining("\n"));
 	}
 
 }
