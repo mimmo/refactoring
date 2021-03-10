@@ -1,13 +1,16 @@
 package refactoring;
 
+import java.util.Map;
+
 public class Movie {
 
 	public static final int REGULAR = 0;
 	public static final int NEW_RELEASE = 1;
 	public static final int CHILDRENS = 2;
 
+	private Map<Integer, Price> _pricesMap = Map.of(REGULAR, new RegularPrice(), NEW_RELEASE, new NewReleasePrice(), CHILDRENS, new ChildrensPrice());
+
 	private String _title;
-	private int _priceCode;
 	private Price _price;
 
 	public Movie(String title, int priceCode) {
@@ -20,19 +23,10 @@ public class Movie {
 	}
 
 	public void setPriceCode(int arg) {
-		switch (arg) {
-		case REGULAR:
-			_price = new RegularPrice();
-			break;
-		case CHILDRENS:
-			_price = new ChildrensPrice();
-			break;
-		case NEW_RELEASE:
-			_price = new NewReleasePrice();
-			break;
-		default:
+		if (_pricesMap.containsKey(arg))
+			_price = _pricesMap.get(arg);
+		else
 			throw new IllegalArgumentException("Incorrect price code");
-		}
 	}
 
 	public String getTitle() {
