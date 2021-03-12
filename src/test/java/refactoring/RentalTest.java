@@ -6,92 +6,65 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class RentalTest {
-	private Movie _movie, _newReleaseMovie, _childrensMovie;
-	private Rental _oneDayRental, _longMovieRental, _newReleaseRental, _longNewReleaseRental, _childrensRental, _longChildrensRental;
+	private Movie _regularMovie, _newReleaseMovie, _childrensMovie;
+	private Rental _regularOneDayRental, _regularLongRental, _newReleaseOneDayRental, _newReleaseLongRental, _childrensOneDayRental, _childrensLongRental;
 
 	@Before
 	public void setUp() throws Exception {
-		_movie = new Movie("The movie", 0);
-		_oneDayRental = new Rental(_movie, 1);
-		_longMovieRental = new Rental(_movie, 5);
+		_regularMovie = new Movie("The movie", 0);
+		_regularOneDayRental = new Rental(_regularMovie, 1);
+		_regularLongRental = new Rental(_regularMovie, 5);
 
 		_newReleaseMovie = new Movie("The movie", 1);
-		_newReleaseRental = new Rental(_newReleaseMovie, 1);
-		_longNewReleaseRental = new Rental(_newReleaseMovie, 5);
+		_newReleaseOneDayRental = new Rental(_newReleaseMovie, 1);
+		_newReleaseLongRental = new Rental(_newReleaseMovie, 5);
 
 		_childrensMovie = new Movie("The movie", 2);
-		_childrensRental = new Rental(_childrensMovie, 1);
-		_longChildrensRental = new Rental(_childrensMovie, 5);
-	}
-
-	// RegularMovie Rental
-	@Test
-	public void considerRegularMovieRental() {
-		assertEquals(rentalCharge(_oneDayRental), 2.0, 0);
+		_childrensOneDayRental = new Rental(_childrensMovie, 1);
+		_childrensLongRental = new Rental(_childrensMovie, 5);
 	}
 
 	@Test
-	public void considerRegularMovieRentalFiveDaysLong() {
-		assertEquals(rentalCharge(_longMovieRental), 6.5, 0);
+	public void RegularMovieOneDayRental() {
+		assertEquals(rentalCharge(_regularOneDayRental), 2.0, 0);
+		assertEquals(rentalPoints(_regularOneDayRental), 1);
 	}
 
 	@Test
-	public void earnOnePointWithRegularMovieRental() {
-		assertEquals(rentalPoints(_oneDayRental), 1);
+	public void RegularMovieLongRental() {
+		assertEquals(rentalCharge(_regularLongRental), 6.5, 0);
+		assertEquals(rentalPoints(_regularLongRental), 1);
 	}
 
 	@Test
-	public void earnOnePointWithRegularMovieRentalForMoreThanOneDay() {
-		assertEquals(rentalPoints(_longMovieRental), 1);
-	}
-
-	// NewReleaseMovie Rental
-	@Test
-	public void considerNewReleaseMovieRental() {
-		assertEquals(rentalCharge(_newReleaseRental), 3.0, 0);
+	public void NewReleaseMovieOneDayRental() {
+		assertEquals(rentalCharge(_newReleaseOneDayRental), 3.0, 0);
+		assertEquals(rentalPoints(_newReleaseOneDayRental), 1);
 	}
 
 	@Test
-	public void considerNewReleaseMovieRentalFiveDaysLong() {
-		assertEquals(rentalCharge(_longNewReleaseRental), 15.0, 0);
+	public void NewReleaseMovieLongRental() {
+		assertEquals(rentalCharge(_newReleaseLongRental), 15.0, 0);
+		assertEquals(rentalPoints(_newReleaseLongRental), 2);
 	}
 
 	@Test
-	public void earnOnePointWithNewReleaseMovieRental() {
-		assertEquals(rentalPoints(_newReleaseRental), 1);
+	public void ChildrensMovieOneDayRental() {
+		assertEquals(rentalCharge(_childrensOneDayRental), 1.5, 0);
+		assertEquals(rentalPoints(_childrensOneDayRental), 1);
 	}
 
 	@Test
-	public void earnDoublePointsWithNewReleaseMovieRentalForMoreThanOneDay() {
-		assertEquals(rentalPoints(_longNewReleaseRental), 2);
-	}
-
-	// ChildrensMovie Rental
-	@Test
-	public void considerChildrensMovieRental() {
-		assertEquals(rentalCharge(_childrensRental), 1.5, 0);
-	}
-
-	@Test
-	public void considerChildrensMovieRentalFiveDaysLong() {
-		assertEquals(rentalCharge(_longChildrensRental), 4.5, 0);
-	}
-
-	@Test
-	public void earnOnePointWithChildrensMovieRental() {
-		assertEquals(rentalPoints(_childrensRental), 1);
-	}
-
-	@Test
-	public void earnOnePointWithChildrensMovieRentalForMoreThanOneDay() {
-		assertEquals(rentalPoints(_longChildrensRental), 1);
+	public void ChildrensMovieLongRental() {
+		assertEquals(rentalCharge(_childrensLongRental), 4.5, 0);
+		assertEquals(rentalPoints(_childrensLongRental), 1);
 	}
 
 	private double rentalCharge(Rental rental) {
-		return rental.getMovie().getCharge(rental.getDaysRented());
+		return rental.getCharge();
 	}
 
 	private int rentalPoints(Rental rental) {
-		return rental.getMovie().getFrequentRenterPoints(rental.getDaysRented());
+		return rental.getFrequentRenterPoints();
 	}
 }
