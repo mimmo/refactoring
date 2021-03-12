@@ -7,33 +7,27 @@ import org.junit.Test;
 
 public class RentalTest {
 	private Movie _movie, _newReleaseMovie, _childrensMovie;
-	private Rental _movieRental, _longMovieRental, _newReleaseRental, _longNewReleaseRental, _childrensRental, _longChildrensRental;
+	private Rental _oneDayRental, _longMovieRental, _newReleaseRental, _longNewReleaseRental, _childrensRental, _longChildrensRental;
 
 	@Before
 	public void setUp() throws Exception {
 		_movie = new Movie("The movie", 0);
-		_movieRental = new Rental(_movie, 1);
+		_oneDayRental = new Rental(_movie, 1);
 		_longMovieRental = new Rental(_movie, 5);
+
 		_newReleaseMovie = new Movie("The movie", 1);
 		_newReleaseRental = new Rental(_newReleaseMovie, 1);
 		_longNewReleaseRental = new Rental(_newReleaseMovie, 5);
+
 		_childrensMovie = new Movie("The movie", 2);
 		_childrensRental = new Rental(_childrensMovie, 1);
 		_longChildrensRental = new Rental(_childrensMovie, 5);
 	}
 
-	private double rentalCharge(Rental rental) {
-		return rental.getMovie().getCharge(rental.getDaysRented());
-	}
-
-	private int rentalPoints(Rental rental) {
-		return rental.getMovie().getFrequentRenterPoints(rental.getDaysRented());
-	}
-
 	// RegularMovie Rental
 	@Test
 	public void considerRegularMovieRental() {
-		assertEquals(rentalCharge(_movieRental), 2.0, 0);
+		assertEquals(rentalCharge(_oneDayRental), 2.0, 0);
 	}
 
 	@Test
@@ -43,7 +37,7 @@ public class RentalTest {
 
 	@Test
 	public void earnOnePointWithRegularMovieRental() {
-		assertEquals(rentalPoints(_movieRental), 1);
+		assertEquals(rentalPoints(_oneDayRental), 1);
 	}
 
 	@Test
@@ -91,5 +85,13 @@ public class RentalTest {
 	@Test
 	public void earnOnePointWithChildrensMovieRentalForMoreThanOneDay() {
 		assertEquals(rentalPoints(_longChildrensRental), 1);
+	}
+
+	private double rentalCharge(Rental rental) {
+		return rental.getMovie().getCharge(rental.getDaysRented());
+	}
+
+	private int rentalPoints(Rental rental) {
+		return rental.getMovie().getFrequentRenterPoints(rental.getDaysRented());
 	}
 }
