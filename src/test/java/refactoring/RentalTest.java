@@ -1,6 +1,6 @@
 package refactoring;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,42 +18,42 @@ public class RentalTest {
 	@Test
 	public void RegularMovieOneDayRental() {
 		Rental _regularOneDayRental = new Rental(_regularMovie, 1);
-		assertEquals(_regularOneDayRental.getCharge(), 2.0, 0);
-		assertEquals(_regularOneDayRental.getFrequentRenterPoints(), 1);
+		assertThat(_regularOneDayRental.getCharge()).isEqualTo(2.0);
+		assertThat(_regularOneDayRental.getFrequentRenterPoints()).isEqualTo(1);
 	}
 
 	@Test
 	public void RegularMovieLongRental() {
 		Rental _regularLongRental = new Rental(_regularMovie, 5);
-		assertEquals(_regularLongRental.getCharge(), 6.5, 0);
-		assertEquals(_regularLongRental.getFrequentRenterPoints(), 1);
+		assertThat(_regularLongRental.getCharge()).isEqualTo(6.5);
+		assertThat(_regularLongRental.getFrequentRenterPoints()).isEqualTo(1);
 	}
 
 	@Test
 	public void NewReleaseMovieOneDayRental() {
 		Rental _newReleaseOneDayRental = new Rental(_newReleaseMovie, 1);
-		assertEquals(_newReleaseOneDayRental.getCharge(), 3.0, 0);
-		assertEquals(_newReleaseOneDayRental.getFrequentRenterPoints(), 1);
+		assertThat(_newReleaseOneDayRental.getCharge()).isEqualTo(3.0);
+		assertThat(_newReleaseOneDayRental.getFrequentRenterPoints()).isEqualTo(1);
 	}
 
 	@Test
 	public void NewReleaseMovieLongRental() {
 		Rental _newReleaseLongRental = new Rental(_newReleaseMovie, 5);
-		assertEquals(_newReleaseLongRental.getCharge(), 15.0, 0);
-		assertEquals(_newReleaseLongRental.getFrequentRenterPoints(), 2);
+		assertThat(_newReleaseLongRental.getCharge()).isEqualTo(15.0);
+		assertThat(_newReleaseLongRental.getFrequentRenterPoints()).isEqualTo(2);
 	}
 
 	@Test
 	public void ChildrensMovieOneDayRental() {
 		Rental _childrensOneDayRental = new Rental(_childrensMovie, 1);
-		assertEquals(_childrensOneDayRental.getCharge(), 1.5, 0);
-		assertEquals(_childrensOneDayRental.getFrequentRenterPoints(), 1);
+		assertThat(_childrensOneDayRental.getCharge()).isEqualTo(1.5);
+		assertThat(_childrensOneDayRental.getFrequentRenterPoints()).isEqualTo(1);
 	}
 
 	@Test
 	public void ChildrensMovieLongRental() {
 		Rental _childrensLongRental = new Rental(_childrensMovie, 5);
-		assertEquals(_childrensLongRental.getCharge(), 4.5, 0);
-		assertEquals(_childrensLongRental.getFrequentRenterPoints(), 1);
+		assertThat(_childrensLongRental.getCharge()).isEqualTo(4.5);
+		assertThat(_childrensLongRental.getFrequentRenterPoints()).isEqualTo(1);
 	}
 }
