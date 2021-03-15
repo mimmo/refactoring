@@ -53,7 +53,7 @@ public class CustomerTest {
 	}
 
 	@Test
-	public void noRentalsFullStatement() {
+	public void noRentalsStatement() {
 		assertThat(rows()).hasSize(3);
 		assertThat(row(0)).isEqualTo("Rental Record for mario");
 		assertThat(row(1)).isEqualTo("Amount owed is 0.0");
@@ -61,7 +61,7 @@ public class CustomerTest {
 	}
 
 	@Test
-	public void oneRentalFullStatement() {
+	public void oneRentalStatement() {
 		rent(1);
 		assertThat(rows()).hasSize(4);
 		assertThat(row(0)).isEqualTo("Rental Record for mario");
@@ -71,7 +71,7 @@ public class CustomerTest {
 	}
 
 	@Test
-	public void threeRentalsFullStatement() {
+	public void threeRentalsStatement() {
 		rent(3);
 
 		assertThat(rows()).hasSize(6);
