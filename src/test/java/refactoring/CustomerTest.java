@@ -18,22 +18,22 @@ public class CustomerTest {
 	}
 
 	@Test
-	public void statementHaveCustomerNameInHeader() {
+	public void customerNameInHeader() {
 		assertThat(row(0)).startsWith("Rental Record for");
 	}
 
 	@Test
-	public void considerCustomerWithoutRentalsAmountLine() {
+	public void noRentalsAmountLine() {
 		assertThat(row(1)).startsWith("Amount owed is");
 	}
 
 	@Test
-	public void considerCustomerWithoutRentalsPointsLine() {
+	public void noPointsLine() {
 		assertThat(row(2)).containsSubsequence("You earned", "frequent renter points");
 	}
 
 	@Test
-	public void statementBodyHaveOneLinePerMovieRented() {
+	public void oneLinePerMovieRented() {
 		rent(3);
 		assertThat(row(1)).startsWith("\tThe movie");
 		assertThat(row(2)).startsWith("\tThe movie");
@@ -41,19 +41,19 @@ public class CustomerTest {
 	}
 
 	@Test
-	public void considerCustomerWithThreeRentalsAmountLine() {
+	public void threeRentalsAmountLine() {
 		rent(3);
 		assertThat(row(4)).startsWith("Amount owed is 6.0");
 	}
 
 	@Test
-	public void considerCustomerWithThreeRentalsPointsLine() {
+	public void threeRentalsPointsLine() {
 		rent(3);
 		assertThat(row(5)).startsWith("You earned 3 frequent renter points");
 	}
 
 	@Test
-	public void considerCustomerWithoutRentals() {
+	public void noRentalsFullStatement() {
 		assertThat(rows()).hasSize(3);
 		assertThat(row(0)).isEqualTo("Rental Record for mario");
 		assertThat(row(1)).isEqualTo("Amount owed is 0.0");
@@ -61,7 +61,7 @@ public class CustomerTest {
 	}
 
 	@Test
-	public void considerCustomerWithOneRental() {
+	public void oneRentalFullStatement() {
 		rent(1);
 		assertThat(rows()).hasSize(4);
 		assertThat(row(0)).isEqualTo("Rental Record for mario");
@@ -71,7 +71,7 @@ public class CustomerTest {
 	}
 
 	@Test
-	public void considerCustomerWithThreeRentals() {
+	public void threeRentalsFullStatement() {
 		rent(3);
 
 		assertThat(rows()).hasSize(6);
