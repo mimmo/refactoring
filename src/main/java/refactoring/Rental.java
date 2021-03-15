@@ -8,6 +8,10 @@ public class Rental {
 	public Rental(Movie movie, int daysRented) {
 		_movie = movie;
 		_daysRented = daysRented;
+
+		if (_daysRented <= 0) {
+		    throw new IllegalArgumentException("Days must be greater than 0!");
+		}
 	}
 
 	public int getDaysRented() {
