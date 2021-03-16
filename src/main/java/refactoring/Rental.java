@@ -1,16 +1,33 @@
 package refactoring;
 
 public class Rental {
-
 	private Movie _movie;
 	private int _daysRented;
 
-	public Rental(Movie movie, int daysRented) {
-		_movie = movie;
-		_daysRented = daysRented;
+	public static Rental.Builder builder(Movie movie) {
+		return new Builder(movie);
+	}
 
-		if (_daysRented <= 0) {
-		    throw new IllegalArgumentException("Days must be greater than 0!");
+	public static class Builder {
+		private Movie movie;
+		private int days;
+
+		public Rental build() {
+			Rental rental = new Rental();
+			rental._movie = movie;
+			rental._daysRented = days;
+
+			return rental;
+		}
+
+		public Builder days(int days) {
+			this.days = days;
+			return this;
+		}
+
+		private Builder(Movie movie) {
+			days = 1;
+			this.movie = movie;
 		}
 	}
 
@@ -29,4 +46,6 @@ public class Rental {
 	public int getFrequentRenterPoints() {
 		return _movie.getFrequentRenterPoints(_daysRented);
 	}
+
+	private Rental() {}
 }

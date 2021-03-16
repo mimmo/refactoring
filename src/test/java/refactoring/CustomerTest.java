@@ -88,6 +88,6 @@ public class CustomerTest {
 	}
 
 	private void rent(int times) {
-		IntStream.range(0, times).forEach(i -> _customer.addRental(new Rental(new Movie("The movie", 0), 1)));
+		IntStream.range(0, times).forEach(i -> _customer.addRental(Rental.builder(new Movie("The movie", 0)).days(1).build()));
 	}
 }
