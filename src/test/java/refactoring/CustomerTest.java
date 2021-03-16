@@ -73,7 +73,6 @@ public class CustomerTest {
 	@Test
 	public void threeRentalsStatement() {
 		rent(3);
-
 		assertThat(rows()).hasSize(6);
 		assertThat(row(1)).isEqualTo("\tThe movie\t2.0");
 		assertThat(row(2)).isEqualTo("\tThe movie\t2.0");
