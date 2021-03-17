@@ -13,8 +13,12 @@ public class Customer {
 		_name = name;
 	}
 
-	public void addRental(Rental arg) {
-		_rentals.add(arg);
+	public Customer addRental(Rental value) {
+		return addRentals(List.of(value));
+	}
+	public Customer addRentals(List<Rental>  values) {
+		_rentals.addAll(values);
+		return this;
 	}
 
 	public String getName() {
