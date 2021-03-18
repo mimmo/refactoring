@@ -42,12 +42,19 @@ public class ConsoleTest {
 	}
 
 	@Test
+	public void allParametersMustBeValidated() {
+		Console console = new Console(consoleOut, "mario", "the movie", "1", "2", "the movie 2", "not a number", "1");
+		console.execute();
+		assertThat(out.toString()).isEqualTo("Please check rental parameters and try again\n");
+	}
+
+	@Test
 	public void RegularMovieOneDayRental() {
-		Console console = new Console(consoleOut, "Mario", "The movie asd", "0", "1");
+		Console console = new Console(consoleOut, "Mario", "The movie", "0", "1");
 		console.execute();
 		assertThat(out.toString()).isEqualTo(
 			"Rental Record for Mario\n" +
-			"	The movie asd	2.0\n" +
+			"	The movie	2.0\n" +
 			"Amount owed is 2.0\n" +
 			"You earned 1 frequent renter points\n"
 		);

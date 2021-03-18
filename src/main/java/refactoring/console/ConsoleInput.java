@@ -23,11 +23,11 @@ public class ConsoleInput {
 	}
 
 	public Customer getCustomer() {
-		return _inputCustomer.asCustomer();
+		return _inputCustomer.asObject();
 	}
 
 	public List<Rental> getRentals() {
-		return _inputRentals.asRentals();
+		return _inputRentals.asObject();
 	}
 
 }
