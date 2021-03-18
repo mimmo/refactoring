@@ -41,4 +41,28 @@ public class ConsoleTest {
 		assertThat(out.toString()).isEqualTo("Please check rental parameters and try again\n");
 	}
 
+	@Test
+	public void RegularMovieOneDayRental() {
+		Console console = new Console(consoleOut, "Mario", "The movie asd", "0", "1");
+		console.execute();
+		assertThat(out.toString()).isEqualTo(
+			"Rental Record for Mario\n" +
+			"	The movie asd	2.0\n" +
+			"Amount owed is 2.0\n" +
+			"You earned 1 frequent renter points\n"
+		);
+	}
+
+	@Test
+	public void statementWithManyMovies() {
+		Console console = new Console(consoleOut, "mario", "The movie", "0", "1", "The movie 2", "0", "1");
+		console.execute();
+		assertThat(out.toString()).isEqualTo(
+			"Rental Record for mario\n" +
+			"	The movie	2.0\n" +
+			"	The movie 2	2.0\n" +
+			"Amount owed is 4.0\n" +
+			"You earned 2 frequent renter points\n"
+		);
+	}
 }
