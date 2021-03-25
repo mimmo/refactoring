@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CustomerTest {
+public class TextStatementTest {
 
 	private Customer _customer;
 
@@ -84,7 +84,8 @@ public class CustomerTest {
 	}
 
 	private List<String> rows() {
-		return List.of(_customer.statement().split("\n"));
+		String statement = new TextStatement().value(_customer);
+		return List.of(statement.split("\n"));
 	}
 
 	private void rent(int times) {

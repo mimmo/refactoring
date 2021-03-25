@@ -16,7 +16,7 @@ public class Customer {
 	public Customer addRental(Rental value) {
 		return addRentals(List.of(value));
 	}
-	public Customer addRentals(List<Rental>  values) {
+	public Customer addRentals(List<Rental> values) {
 		_rentals.addAll(values);
 		return this;
 	}
@@ -26,23 +26,18 @@ public class Customer {
 	}
 
 	public String statement() {
-		Iterator<Rental> rentals = _rentals.iterator();
-		String result = "Rental Record for " + getName() + "\n";
-
-		while (rentals.hasNext()) {
-			Rental each = rentals.next();
-
-			// show figures for this rental
-			result += "\t" + each.getMovie().getTitle() + "\t" + String.valueOf(each.getCharge()) + "\n";
-		}
-
-		// add footer lines
-		result += "Amount owed is " + String.valueOf(getTotalCharge()) + "\n";
-		result += "You earned " + String.valueOf(getTotalFrequentRenterPoints()) + " frequent renter points";
-		return result;
+		return new TextStatement().value(this);
 	}
 
-	private double getTotalCharge() {
+	public String htmlStatement() {
+		return new HtmlStatement().value(this);
+	}
+
+	public List<Rental> getRentals() {
+		return _rentals;
+	}
+
+	public double getTotalCharge() {
 		double result = 0;
 		Iterator<Rental> rentals = _rentals.iterator();
 
@@ -53,7 +48,7 @@ public class Customer {
 		return result;
 	}
 
-	private int getTotalFrequentRenterPoints() {
+	public int getTotalFrequentRenterPoints() {
 		int result = 0;
 		Iterator<Rental> rentals = _rentals.iterator();
 
