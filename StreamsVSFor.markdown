@@ -25,38 +25,38 @@ public InputRentals(List<String> arguments) {
 # For Loop
 ```
 public boolean isValid() {
-		boolean valid = !_lines.isEmpty();
+	boolean valid = !_lines.isEmpty();
 
-		for(InputRental l: _lines) {
-			if(!l.isValid()){
-				valid = false;
-				break;
-			}
+	for(InputRental l: _lines) {
+		if(!l.isValid()){
+			valid = false;
+			break;
 		}
-
-		return valid;
 	}
+
+	return valid;
+}
 ```
 # The same code with streams
 ```
 public boolean isValid() {
-		return !_lines.isEmpty() && !_lines
-			.stream()
-			.filter(l -> !l.isValid())
-			.findAny()
-			.isPresent();
-	}
+	return !_lines.isEmpty() && !_lines
+		.stream()
+		.filter(l -> !l.isValid())
+		.findAny()
+		.isPresent();
+}
 ```
 ```
 public boolean isValid() {
-		if (_lines.isEmpty()) {
-			return false;
-		}
-
-		return _lines
-			.stream()
-			.allMatch(InputRental::isValid);
+	if (_lines.isEmpty()) {
+		return false;
 	}
+
+	return _lines
+		.stream()
+		.allMatch(InputRental::isValid);
+}
 ```
 
 ---
@@ -65,21 +65,21 @@ public boolean isValid() {
 
 ```
 public List<Rental> asObject() {
-		List<Rental> rentals = new ArrayList<>();
+	List<Rental> rentals = new ArrayList<>();
 
-		for(InputRental l: _lines) {
-			rentals.add(l.asObject());
-		}
-
-		return rentals;
+	for(InputRental l: _lines) {
+		rentals.add(l.asObject());
 	}
+
+	return rentals;
+}
 ```
 # The same code with streams
 ```
-	public List<Rental> asObject() {
-		return _lines
-			.stream()
-			.map(InputRental::asObject)
-			.collect(Collectors.toList());
-	}
+public List<Rental> asObject() {
+	return _lines
+		.stream()
+		.map(InputRental::asObject)
+		.collect(Collectors.toList());
+}
 ```
