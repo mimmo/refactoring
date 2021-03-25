@@ -85,13 +85,13 @@ public List<Rental> asObject() {
 ```
 ---
 
-#String Join
+# String Join
 ```
 List<String> strings = List.of("aaa","bbb","ccc");
 String.join(";", strings);
 ```
 
-#With Streams
+# With Streams
 ```
 List<String> strings = List.of("aaa","bbb","ccc");
 strings.stream().collect(Collectors.joining(";"));
